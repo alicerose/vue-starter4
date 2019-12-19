@@ -8,5 +8,10 @@ export default [
     path: "/about",
     name: "about",
     component: () => import("@/views/About")
+  },
+  {
+    path: "/api",
+    name: "api",
+    component: () => import("@/views/Api")
   }
 ];
