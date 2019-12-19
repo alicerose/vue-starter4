@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <div>ENV TEST : {{ env_test }}</div>
     <p>
       For a guide and recipes on how to configure / customize this project,<br />
       check out the
@@ -103,10 +104,17 @@
 </template>
 
 <script>
+import { SAMPLE } from "../constants";
+
 export default {
   name: "HelloWorld",
   props: {
     msg: String
+  },
+  computed: {
+    env_test() {
+      return SAMPLE;
+    }
   }
 };
 </script>
