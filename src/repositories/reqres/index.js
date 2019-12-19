@@ -6,13 +6,13 @@ import repositories from "@/repositories";
  */
 export const Reqres = new (class ReqresApi extends repositories {
   HOST = "https://reqres.in/api";
-  USER = "/users";
+  USERS = "/users";
 
   /**
    * GET
    * @returns {*}
    */
-  getList(params) {
-    return super.get(this.HOST, this.USER, params);
+  getUserList(params) {
+    return super.get(this.HOST, this.USERS, params);
   }
 })();

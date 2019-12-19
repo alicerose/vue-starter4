@@ -1,13 +1,24 @@
 import axios from "axios";
 
-const withCredentials = false;
+/**
+ * Axios default configs
+ * @type {{withCredentials: boolean, timeout: number}}
+ */
+const configs = {
+  withCredentials: false,
+  timeout: 5000
+};
 const api = axios.create({
-  withCredentials
+  ...configs
 });
 
+/**
+ * @todo: interceptors
+ * @todo: cancel token
+ */
 export default class {
   /**
-   * API Call
+   * API Request
    * @param callMethod
    * @param path
    * @param params
@@ -19,15 +30,47 @@ export default class {
       resolve(api[callMethod](path, params));
     });
   }
+
+  /**
+   *
+   * @param endpoint
+   * @param path
+   * @param params
+   * @returns {Promise<unknown>}
+   */
   post(endpoint, path, params) {
     return this.request("post", endpoint + path, params);
   }
-  get(endpoint, path, params = null) {
+
+  /**
+   *
+   * @param endpoint
+   * @param path
+   * @param params
+   * @returns {Promise<unknown>}
+   */
+  get(endpoint, path, params) {
     return this.request("get", endpoint + path, { params: params });
   }
+
+  /**
+   *
+   * @param endpoint
+   * @param path
+   * @param params
+   * @returns {Promise<unknown>}
+   */
   put(endpoint, path, params) {
     return this.request("put", endpoint + path, params);
   }
+
+  /**
+   *
+   * @param endpoint
+   * @param path
+   * @param params
+   * @returns {Promise<unknown>}
+   */
   delete(endpoint, path, params) {
     return this.request("delete", endpoint + path, params);
   }

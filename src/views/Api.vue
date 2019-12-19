@@ -1,7 +1,8 @@
 <template>
   <div class="wrapper">
     <div class="call">
-      <input type="number" v-model="params.getList.page" />
+      <h2>UserList</h2>
+      <input type="number" v-model="params.getUserList.page" />
       <button @click="get">GET</button>
     </div>
     <div class="response">
@@ -20,7 +21,7 @@ export default {
   data() {
     return {
       params: {
-        getList: {
+        getUserList: {
           page: 1
         }
       },
@@ -33,9 +34,9 @@ export default {
   methods: {
     get() {
       const params = {
-        page: this.params.getList.page
+        page: this.params.getUserList.page
       };
-      Reqres.getList(params)
+      Reqres.getUserList(params)
         .then(result => {
           this.response.get = result;
         })
@@ -57,12 +58,20 @@ export default {
 .call,
 .response {
   width: 50%;
-  text-align: leftl;
+  text-align: left;
+}
+.call {
+  padding: 1em;
 }
 .response {
   background: #eee;
+  position: sticky;
+  top: 0;
   pre {
+    max-height: 100vh;
+    overflow: auto;
     text-align: left;
+    padding: 1em;
   }
 }
 </style>
