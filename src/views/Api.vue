@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { Reqres } from "@/repositories/reqres";
+import { Reqres } from "@/api/reqres";
 
 export default {
   name: "Api",

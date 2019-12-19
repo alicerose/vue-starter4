@@ -1,12 +1,12 @@
-import repositories from "@/repositories";
+import api from "@/api";
 
 /**
  * https://reqres.in/
  * @type {ReqresApi}
  */
-export const Reqres = new (class ReqresApi extends repositories {
-  HOST = "https://reqres.in/api";
-  USERS = "/users";
+export const Reqres = new (class ReqresApi extends api {
+  HOST = "https://reqres.in/api/";
+  USERS = "users";
 
   /**
    * GET
