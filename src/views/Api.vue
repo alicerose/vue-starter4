@@ -4,10 +4,20 @@
       <h2>UserList</h2>
       <input type="number" v-model="params.getUserList.page" />
       <button @click="get">GET</button>
+      <div class="c__users">
+        <template v-for="user of response.userList">
+          <div :key="user.id" class="c__user">
+            <div class="c__user--avatar">
+              <img :src="user.avatar" :alt="name(user)" />
+            </div>
+            <div class="c__user--name">{{ user.id }} : {{ name(user) }}</div>
+          </div>
+        </template>
+      </div>
     </div>
     <div class="response">
       <pre
-        >{{ response.get }}
+        >{{ response.raw }}
       </pre>
     </div>
   </div>
@@ -26,10 +36,16 @@ export default {
         }
       },
       response: {
-        get: null,
+        raw: null,
+        userList: null,
         error: null
       }
     };
+  },
+  computed: {
+    users() {
+      return this.response.userList;
+    }
   },
   methods: {
     get() {
@@ -38,11 +54,15 @@ export default {
       };
       Reqres.getUserList(params)
         .then(result => {
-          this.response.get = result;
+          this.response.raw = result;
+          this.response.userList = result.data.data;
         })
         .catch(error => {
           this.response.error = error;
         });
+    },
+    name(user) {
+      return user.first_name + " " + user.last_name;
     }
   }
 };
@@ -73,5 +93,30 @@ export default {
     text-align: left;
     padding: 1em;
   }
+}
+.c__users {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+.c__user {
+  width: 100%;
+  max-width: 128px;
+  border: 1px solid #ddd;
+  & + & {
+    margin: {
+      top: 0.5em;
+    }
+  }
+}
+.c__user-avatar {
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+.c__user--name {
+  text-align: center;
 }
 </style>

@@ -50,9 +50,7 @@ export default class {
    * @returns {Promise<unknown>}
    */
   request(callMethod, path, params) {
-    return new Promise(async resolve => {
-      resolve(api[callMethod](path, params));
-    });
+    return api[callMethod](path, params);
   }
 
   /**
