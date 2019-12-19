@@ -104,7 +104,7 @@
 </template>
 
 <script>
-import { SAMPLE } from "../constants";
+import { SAMPLE } from "@/constants";
 
 export default {
   name: "HelloWorld",
