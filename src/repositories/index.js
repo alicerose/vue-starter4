@@ -13,7 +13,35 @@ const api = axios.create({
 });
 
 /**
- * @todo: interceptors
+ * Request Interceptors
+ */
+api.interceptors.request.use(
+  request => {
+    console.log("[API] configs: ", api.defaults);
+    console.log("[API] request: ", request);
+    return request;
+  },
+  error => {
+    console.error("[API] request error: ", error);
+    return Promise.reject(error);
+  }
+);
+
+/**
+ * Response Interceptors
+ */
+api.interceptors.response.use(
+  response => {
+    console.log("[API] response: ", response);
+    return response;
+  },
+  error => {
+    console.error("[API] response error: ", error);
+    return Promise.reject(error);
+  }
+);
+
+/**
  * @todo: cancel token
  */
 export default class {
@@ -25,7 +53,6 @@ export default class {
    * @returns {Promise<unknown>}
    */
   request(callMethod, path, params) {
-    console.log("[API]", callMethod, ":", path, params);
     return new Promise(async resolve => {
       resolve(api[callMethod](path, params));
     });
