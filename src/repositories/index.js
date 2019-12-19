@@ -1,15 +1,12 @@
 import axios from "axios";
+import { API_CONFIGS } from "@/constants/configs";
 
 /**
- * Axios default configs
- * @type {{withCredentials: boolean, timeout: number}}
+ * Axios
+ * @type {AxiosInstance}
  */
-const configs = {
-  withCredentials: false,
-  timeout: 5000
-};
 const api = axios.create({
-  ...configs
+  ...API_CONFIGS
 });
 
 /**
