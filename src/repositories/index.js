@@ -98,6 +98,17 @@ export default class {
    * @param params
    * @returns {Promise<unknown>}
    */
+  patch(endpoint, path, params) {
+    return this.request("patch", endpoint + path, params);
+  }
+
+  /**
+   *
+   * @param endpoint
+   * @param path
+   * @param params
+   * @returns {Promise<unknown>}
+   */
   delete(endpoint, path, params) {
     return this.request("delete", endpoint + path, params);
   }
