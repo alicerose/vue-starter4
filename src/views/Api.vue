@@ -3,17 +3,17 @@
     <div class="call">
       <h2>UserList</h2>
       <input type="number" v-model="params.getUserList.page" />
-      <button @click="get">GET</button>
+      <button @click="getUserList">GET</button>
       <div class="c__users">
         <template v-for="user of response.userList">
-          <div :key="user.id" class="c__user">
-            <div class="c__user--avatar">
-              <img :src="user.avatar" :alt="name(user)" />
-            </div>
-            <div class="c__user--name">{{ user.id }} : {{ name(user) }}</div>
-          </div>
+          <User :user="user" :key="user.id" />
         </template>
       </div>
+
+      <h2>User</h2>
+      <input type="number" v-model.number="params.getUser.id" />
+      <button @click="getUser">GET</button>
+      <User :user="response.user" v-if="response.user" />
     </div>
     <div class="response">
       <pre
@@ -25,19 +25,25 @@
 
 <script>
 import { Reqres } from "@/api/reqres";
+import User from "@/components/User";
 
 export default {
   name: "Api",
+  components: { User },
   data() {
     return {
       params: {
         getUserList: {
           page: 1
+        },
+        getUser: {
+          id: 1
         }
       },
       response: {
         raw: null,
         userList: null,
+        user: null,
         error: null
       }
     };
@@ -48,7 +54,7 @@ export default {
     }
   },
   methods: {
-    get() {
+    getUserList() {
       const params = {
         page: this.params.getUserList.page
       };
@@ -61,8 +67,17 @@ export default {
           this.response.error = error;
         });
     },
-    name(user) {
-      return user.first_name + " " + user.last_name;
+    getUser() {
+      const params = this.params.getUser.id;
+      console.log(params);
+      Reqres.getUser(params)
+        .then(result => {
+          this.response.raw = result;
+          this.response.user = result.data.data;
+        })
+        .catch(error => {
+          this.response.error = error;
+        });
     }
   }
 };
@@ -98,25 +113,5 @@ export default {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
-}
-.c__user {
-  width: 100%;
-  max-width: 128px;
-  border: 1px solid #ddd;
-  & + & {
-    margin: {
-      top: 0.5em;
-    }
-  }
-}
-.c__user-avatar {
-  img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-}
-.c__user--name {
-  text-align: center;
 }
 </style>
