@@ -1,0 +1,17 @@
+export default [
+  {
+    path: "/",
+    name: "home",
+    component: () => import("@/views/Home")
+  },
+  {
+    path: "/about",
+    name: "about",
+    component: () => import("@/views/About")
+  },
+  {
+    path: "/api",
+    name: "api",
+    component: () => import("@/views/Api")
+  }
+];
