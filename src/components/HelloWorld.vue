@@ -2,6 +2,10 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <div>ENV TEST : {{ env_test }}</div>
+    <div>
+      GIT :
+      {{ hash }}
+    </div>
     <p>
       For a guide and recipes on how to configure / customize this project,<br />
       check out the
@@ -104,10 +108,15 @@
 </template>
 
 <script>
-import { SAMPLE } from "@/constants";
+import { SAMPLE, HASH } from "@/constants";
 
 export default {
   name: "HelloWorld",
+  data() {
+    return {
+      hash: HASH
+    };
+  },
   props: {
     msg: String
   },
