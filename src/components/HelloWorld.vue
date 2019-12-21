@@ -108,13 +108,13 @@
 </template>
 
 <script>
-import { SAMPLE, HASH } from "@/constants";
+import { SAMPLE, GIT_COMMIT_HASH } from "@/constants";
 
 export default {
   name: "HelloWorld",
   data() {
     return {
-      hash: HASH
+      hash: GIT_COMMIT_HASH
     };
   },
   props: {
