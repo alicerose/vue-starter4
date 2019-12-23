@@ -32,7 +32,7 @@
 }
 body {
   @include mq(min) {
-    background: #eee;
+    background: #fcfcfc;
   }
 }
 </style>
