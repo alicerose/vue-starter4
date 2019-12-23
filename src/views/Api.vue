@@ -2,7 +2,8 @@
   <div class="wrapper">
     <div class="call">
       <h2>UserList</h2>
-      <input type="number" v-model="params.getUserList.page" />
+      page : <input type="number" v-model="params.getUserList.page" /><br />
+      delay: <input type="number" v-model="params.getUserList.delay" />
       <button @click="getUserList">GET</button>
       <div class="c__users">
         <template v-for="user of response.userList">
@@ -34,7 +35,8 @@ export default {
     return {
       params: {
         getUserList: {
-          page: 1
+          page: 1,
+          delay: null
         },
         getUser: {
           id: 1
@@ -55,8 +57,9 @@ export default {
   },
   methods: {
     getUserList() {
+      this.response.userList = null;
       const params = {
-        page: this.params.getUserList.page
+        ...this.params.getUserList
       };
       Reqres.getUserList(params)
         .then(result => {
@@ -69,7 +72,6 @@ export default {
     },
     getUser() {
       const params = this.params.getUser.id;
-      console.log(params);
       Reqres.getUser(params)
         .then(result => {
           this.response.raw = result;
