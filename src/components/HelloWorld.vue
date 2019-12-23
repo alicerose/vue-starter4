@@ -1,10 +1,9 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <div>ENV TEST : {{ env_test }}</div>
     <div>
       GIT :
-      {{ hash }}
+      {{ commitHash }}
     </div>
     <p>
       For a guide and recipes on how to configure / customize this project,<br />
@@ -108,22 +107,10 @@
 </template>
 
 <script>
-import { SAMPLE, GIT_COMMIT_HASH } from "@/constants";
-
 export default {
   name: "HelloWorld",
-  data() {
-    return {
-      hash: GIT_COMMIT_HASH
-    };
-  },
   props: {
     msg: String
-  },
-  computed: {
-    env_test() {
-      return SAMPLE;
-    }
   }
 };
 </script>

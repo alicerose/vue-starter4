@@ -2,7 +2,19 @@
  *
  * @type {string}
  */
-export const SAMPLE = process.env.VUE_APP_ENV_SAMPLE;
+export const SITE_TITLE = process.env.VUE_APP_SITE_TITLE;
+
+/**
+ *
+ * @type {string}
+ */
+export const SITE_TITLE_SEPARATOR = " | ";
+
+/**
+ *
+ * @type {string}
+ */
+export const SITE_DESCRIPTION = process.env.VUE_APP_SITE_DESCRIPTION;
 
 /**
  *
