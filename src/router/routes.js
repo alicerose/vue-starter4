@@ -2,7 +2,11 @@ export default [
   {
     path: "/",
     name: "home",
-    component: () => import("@/views/Home")
+    component: () => import("@/views/Home"),
+    meta: {
+      title: "Home",
+      description: "Home description"
+    }
   },
   {
     path: "/about",
@@ -12,6 +16,10 @@ export default [
   {
     path: "/api",
     name: "api",
-    component: () => import("@/views/Api")
+    component: () => import("@/views/Api"),
+    meta: {
+      title: "Api",
+      description: "Api test page"
+    }
   }
 ];

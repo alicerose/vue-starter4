@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import routes from "@/router/routes";
+import { updateDescription, updateTitle } from "@/mixins";
 
 Vue.use(VueRouter);
 
@@ -19,6 +20,14 @@ const router = new VueRouter({
       }, 500);
     });
   }
+});
+
+router.beforeEach((to, from, next) => {
+  console.log("[ROUTER] from:", from);
+  console.log("[ROUTER] to:", to);
+  updateTitle(to.meta.title);
+  updateDescription(to.meta.description);
+  next();
 });
 
 export default router;
