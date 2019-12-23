@@ -30,4 +30,9 @@
     }
   }
 }
+body {
+  @include mq(min) {
+    background: #fcfcfc;
+  }
+}
 </style>
