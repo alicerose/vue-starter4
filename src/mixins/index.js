@@ -1,6 +1,7 @@
 import {
   GIT_COMMIT_HASH,
   SITE_DESCRIPTION,
+  SITE_HOST,
   SITE_TITLE,
   SITE_TITLE_SEPARATOR
 } from "@/constants";
@@ -25,6 +26,16 @@ export const updateDescription = description => {
   document
     .querySelector("meta[name='description']")
     .setAttribute("content", description ? description : SITE_DESCRIPTION);
+};
+
+/**
+ * Update canonical url from router
+ * @param path
+ */
+export const updateCanonical = path => {
+  document
+    .querySelector("link[rel='canonical']")
+    .setAttribute("href", path ? path : SITE_HOST);
 };
 
 /**

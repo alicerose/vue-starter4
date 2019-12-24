@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import routes from "@/router/routes";
-import { updateDescription, updateTitle } from "@/mixins";
+import { updateCanonical, updateDescription, updateTitle } from "@/mixins";
 
 Vue.use(VueRouter);
 
@@ -27,6 +27,7 @@ router.beforeEach((to, from, next) => {
   console.log("[ROUTER] to:", to);
   updateTitle(to.meta.title);
   updateDescription(to.meta.description);
+  updateCanonical(to.path);
   next();
 });
 
