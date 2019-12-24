@@ -18,6 +18,11 @@
 
       <h2>Qiita Posted Contents</h2>
       <button type="button" @click="getPosts">Qiita</button>
+      <div v-if="response.qiita.posts">
+        <template v-for="(post, index) in response.qiita.posts">
+          <Post :post="post" v-bind:key="index" />
+        </template>
+      </div>
     </div>
     <div class="response">
       <pre
@@ -30,12 +35,13 @@
 <script>
 import { Reqres } from "@/api/reqres";
 import User from "@/components/User";
+import Post from "@/components/Post";
 import { Qiita } from "@/api/qiita";
-import { QiitaPosts } from "@/models/qiita/Item";
+import { QiitaPosts } from "@/models/qiita/Post";
 
 export default {
   name: "Api",
-  components: { User },
+  components: { User, Post },
   data() {
     return {
       params: {

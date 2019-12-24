@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export class QiitaPosts {
   /**
    *
@@ -33,5 +35,14 @@ export class QiitaPosts {
     } else {
       console.error("Non array given.");
     }
+  }
+
+  /**
+   *
+   * @returns {string}
+   */
+  get postTime() {
+    const date = moment(new Date(this.created_at));
+    return date.format("YYYY年MM月DD日 HH:mm");
   }
 }
