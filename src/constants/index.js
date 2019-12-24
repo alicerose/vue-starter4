@@ -20,4 +20,10 @@ export const SITE_DESCRIPTION = process.env.VUE_APP_SITE_DESCRIPTION;
  *
  * @type {string}
  */
+export const SITE_HOST = process.env.VUE_APP_HOST;
+
+/**
+ *
+ * @type {string}
+ */
 export const GIT_COMMIT_HASH = process.env.VUE_APP_GIT_COMMIT_HASH;
