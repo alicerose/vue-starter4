@@ -15,6 +15,9 @@
       <input type="number" v-model.number="params.getUser.id" />
       <button @click="getUser">GET</button>
       <User :user="response.user" v-if="response.user" />
+
+      <h2>Qiita Posted Contents</h2>
+      <button type="button" @click="getItems">Qiita</button>
     </div>
     <div class="response">
       <pre
@@ -27,6 +30,7 @@
 <script>
 import { Reqres } from "@/api/reqres";
 import User from "@/components/User";
+import { Qiita } from "@/api/qiita";
 
 export default {
   name: "Api",
@@ -76,6 +80,16 @@ export default {
         .then(result => {
           this.response.raw = result;
           this.response.user = result.data.data;
+        })
+        .catch(error => {
+          this.response.error = error;
+        });
+    },
+    getItems() {
+      const params = "";
+      Qiita.getItems(params)
+        .then(result => {
+          this.response.raw = result;
         })
         .catch(error => {
           this.response.error = error;
