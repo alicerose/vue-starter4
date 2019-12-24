@@ -10,7 +10,7 @@ export const Qiita = new (class QiitaApi extends api {
    * @param params
    * @returns {Promise<unknown>}
    */
-  getItems(params) {
+  getPosts(params) {
     return super.get(this.HOST, this.ITEMS, params);
   }
 })();

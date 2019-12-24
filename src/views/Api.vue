@@ -17,7 +17,7 @@
       <User :user="response.user" v-if="response.user" />
 
       <h2>Qiita Posted Contents</h2>
-      <button type="button" @click="getItems">Qiita</button>
+      <button type="button" @click="getPosts">Qiita</button>
     </div>
     <div class="response">
       <pre
@@ -31,6 +31,7 @@
 import { Reqres } from "@/api/reqres";
 import User from "@/components/User";
 import { Qiita } from "@/api/qiita";
+import { QiitaPosts } from "@/models/qiita/Item";
 
 export default {
   name: "Api",
@@ -50,7 +51,10 @@ export default {
         raw: null,
         userList: null,
         user: null,
-        error: null
+        error: null,
+        qiita: {
+          posts: null
+        }
       }
     };
   },
@@ -85,11 +89,14 @@ export default {
           this.response.error = error;
         });
     },
-    getItems() {
+    getPosts() {
       const params = "";
-      Qiita.getItems(params)
+      Qiita.getPosts(params)
         .then(result => {
           this.response.raw = result;
+          console.log(result.data);
+          this.response.qiita.posts = QiitaPosts.creates(result.data);
+          console.log("Qiita Post Model:", QiitaPosts.creates(result.data));
         })
         .catch(error => {
           this.response.error = error;
