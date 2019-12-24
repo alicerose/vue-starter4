@@ -15,6 +15,10 @@ const api = axios.create({
 api.interceptors.request.use(
   request => {
     const host = new URL(request.url);
+
+    /**
+     * @todo: avoid conditional in interceptor
+     */
     if (host.origin === QIITA_API_HOST) {
       request.headers.Authorization = "Bearer " + QIITA_API_TOKEN;
     }
