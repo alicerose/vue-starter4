@@ -15,6 +15,14 @@
       <input type="number" v-model.number="params.getUser.id" />
       <button @click="getUser">GET</button>
       <User :user="response.user" v-if="response.user" />
+
+      <h2>Qiita Posted Contents</h2>
+      <button type="button" @click="getPosts">Qiita</button>
+      <div v-if="response.qiita.posts">
+        <template v-for="(post, index) in response.qiita.posts">
+          <Post :post="post" v-bind:key="index" />
+        </template>
+      </div>
     </div>
     <div class="response">
       <pre
@@ -27,10 +35,13 @@
 <script>
 import { Reqres } from "@/api/reqres";
 import User from "@/components/User";
+import Post from "@/components/Post";
+import { Qiita } from "@/api/qiita";
+import { QiitaPosts } from "@/models/qiita/Post";
 
 export default {
   name: "Api",
-  components: { User },
+  components: { User, Post },
   data() {
     return {
       params: {
@@ -46,7 +57,10 @@ export default {
         raw: null,
         userList: null,
         user: null,
-        error: null
+        error: null,
+        qiita: {
+          posts: null
+        }
       }
     };
   },
@@ -76,6 +90,19 @@ export default {
         .then(result => {
           this.response.raw = result;
           this.response.user = result.data.data;
+        })
+        .catch(error => {
+          this.response.error = error;
+        });
+    },
+    getPosts() {
+      const params = "";
+      Qiita.getPosts(params)
+        .then(result => {
+          this.response.raw = result;
+          console.log(result.data);
+          this.response.qiita.posts = QiitaPosts.creates(result.data);
+          console.log("Qiita Post Model:", QiitaPosts.creates(result.data));
         })
         .catch(error => {
           this.response.error = error;

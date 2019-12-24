@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_CONFIGS } from "@/constants/configs";
+import { API_CONFIGS, QIITA_API_HOST, QIITA_API_TOKEN } from "@/constants/api";
 
 /**
  * Axios
@@ -14,6 +14,10 @@ const api = axios.create({
  */
 api.interceptors.request.use(
   request => {
+    const host = new URL(request.url);
+    if (host.origin === QIITA_API_HOST) {
+      request.headers.Authorization = "Bearer " + QIITA_API_TOKEN;
+    }
     console.log("[API] configs: ", api.defaults);
     console.log("[API] request: ", request);
     return request;
@@ -44,13 +48,13 @@ api.interceptors.response.use(
 export default class {
   /**
    * API Request
-   * @param callMethod
+   * @param method
    * @param path
    * @param params
    * @returns {Promise<unknown>}
    */
-  request(callMethod, path, params) {
-    return api[callMethod](path, params);
+  request(method, path, params) {
+    return api[method](path, params);
   }
 
   /**
