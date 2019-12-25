@@ -1,5 +1,20 @@
 import axios from "axios";
 import { API_CONFIGS, QIITA_API_HOST, QIITA_API_TOKEN } from "@/constants/api";
+import store from "@/store/";
+
+/**
+ * add api loading count when connection begin
+ * @returns {undefined|Promise<any>}
+ * @constructor
+ */
+const API_LOADING_START = () => store.dispatch("API_LOADING_BEGIN");
+
+/**
+ * subtract api loading count when connection end
+ * @returns {undefined|Promise<any>}
+ * @constructor
+ */
+const API_LOADING_END = () => store.dispatch("API_LOADING_DONE");
 
 /**
  * Axios
@@ -14,6 +29,8 @@ const api = axios.create({
  */
 api.interceptors.request.use(
   request => {
+    API_LOADING_START().then(() => {});
+
     const host = new URL(request.url);
 
     /**
@@ -22,11 +39,12 @@ api.interceptors.request.use(
     if (host.origin === QIITA_API_HOST) {
       request.headers.Authorization = "Bearer " + QIITA_API_TOKEN;
     }
-    console.log("[API] configs: ", api.defaults);
+    // console.log("[API] configs: ", api.defaults);
     console.log("[API] request: ", request);
     return request;
   },
   error => {
+    API_LOADING_END().then(() => {});
     console.error("[API] request error: ", error);
     return Promise.reject(error);
   }
@@ -37,10 +55,12 @@ api.interceptors.request.use(
  */
 api.interceptors.response.use(
   response => {
+    API_LOADING_END().then(() => {});
     console.log("[API] response: ", response);
     return response;
   },
   error => {
+    API_LOADING_END().then(() => {});
     console.error("[API] response error: ", error);
     return Promise.reject(error);
   }

@@ -49,6 +49,10 @@ export const mixin = {
     };
   },
   components: {},
-  computed: {},
+  computed: {
+    API_COUNT() {
+      return this.$store.getters.GETTER_API_LOADING;
+    }
+  },
   methods: {}
 };

@@ -25,9 +25,8 @@
       </div>
     </div>
     <div class="response">
-      <pre
-        >{{ response.raw }}
-      </pre>
+      API : {{ API_COUNT }}
+      <pre>{{ response.raw }}</pre>
     </div>
   </div>
 </template>
@@ -47,7 +46,7 @@ export default {
       params: {
         getUserList: {
           page: 1,
-          delay: null
+          delay: 3
         },
         getUser: {
           id: 1
@@ -100,9 +99,9 @@ export default {
       Qiita.getPosts(params)
         .then(result => {
           this.response.raw = result;
-          console.log(result.data);
+          // console.log(result.data);
+          // console.log("Qiita Post Model:", QiitaPosts.creates(result.data));
           this.response.qiita.posts = QiitaPosts.creates(result.data);
-          console.log("Qiita Post Model:", QiitaPosts.creates(result.data));
         })
         .catch(error => {
           this.response.error = error;
@@ -131,11 +130,12 @@ export default {
   background: #eee;
   position: sticky;
   top: 0;
+  padding: 1em;
   pre {
     max-height: 100vh;
     overflow: auto;
     text-align: left;
-    padding: 1em;
+    font-size: 0.8em;
   }
 }
 .c__users {
