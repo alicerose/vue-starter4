@@ -39,8 +39,26 @@ export const updateCanonical = path => {
 };
 
 /**
+ * Get Query params from current path
+ * @returns {{}|boolean}
+ */
+export const getUrlQueries = () => {
+  const url = new URL(location.href);
+  if (!url.search) {
+    return false;
+  }
+  const q = url.search.substring(1).split("&");
+  const queries = {};
+  for (let query of q) {
+    const que = query.split("=");
+    queries[que[0]] = que[1];
+  }
+  return queries;
+};
+
+/**
  * Global Mixin
- * @type {{components: {}, data(): *, computed: {}, methods: {}}}
+ * @type {{components: {}, data(): {commitHash: string}, computed: {API_COUNT(): computed.$store.getters.GETTER_API_LOADING}, methods: {getUrlQueries: getUrlQueries}}}
  */
 export const mixin = {
   data() {
@@ -54,5 +72,7 @@ export const mixin = {
       return this.$store.getters.GETTER_API_LOADING;
     }
   },
-  methods: {}
+  methods: {
+    getUrlQueries
+  }
 };
