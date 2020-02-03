@@ -39,8 +39,11 @@ export default {
   left: 0;
   width: 100%;
   padding: 0.25em;
-  background-color: transparent;
+  /*background-color: transparent;*/
+  background-color: #fff;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
+  z-index: z(apiLoader);
   &.active {
     background-color: #eee;
   }
