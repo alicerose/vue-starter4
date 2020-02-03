@@ -4,7 +4,11 @@
  */
 export const API_CONFIGS = {
   withCredentials: false,
-  timeout: 5000
+  timeout: 10000,
+  onUploadProgress: progressEvent => {
+    let rate = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+    console.log("[PROGRESS]", progressEvent, rate);
+  }
 };
 
 /**
