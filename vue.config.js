@@ -18,5 +18,6 @@ module.exports = {
       }
     }
   },
-  productionSourceMap: !isProduction
+  productionSourceMap: !isProduction,
+  publicPath: process.env.NODE_ENV === "production" ? "/vue-starter4/" : "/"
 };
