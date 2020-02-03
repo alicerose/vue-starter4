@@ -6,7 +6,8 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link :to="{ name: 'api' }">Api</router-link>
+      <router-link :to="{ name: 'api' }">Api</router-link> |
+      <router-link :to="{ name: 'mixins' }">Mixins</router-link>
     </div>
     <router-view />
   </div>
