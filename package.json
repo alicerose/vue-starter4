@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "VUE_APP_GIT_COMMIT_HASH=$(git rev-parse HEAD) vue-cli-service serve",
     "build": "VUE_APP_GIT_COMMIT_HASH=$(git rev-parse HEAD) vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy:github": "./bin/deploy.sh"
   },
   "dependencies": {
     "axios": "^0.19.0",
