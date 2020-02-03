@@ -6,7 +6,7 @@
     "serve": "VUE_APP_GIT_COMMIT_HASH=$(git rev-parse HEAD) vue-cli-service serve",
     "build": "VUE_APP_GIT_COMMIT_HASH=$(git rev-parse HEAD) vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "gh-pages -d dist"
+    "deploy": "NODE_ENV=production gh-pages -d dist"
   },
   "dependencies": {
     "axios": "^0.19.0",
